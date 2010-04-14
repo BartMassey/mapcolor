@@ -15,9 +15,9 @@ colorize r cs (i, '?') = []
 colorize r cs (i, j) =
     map color_delta [1..c]
     where
-      c0 = fromJust $ findIndex (== j) cs
-      color_delta d | d == c0 = region_atom r (i, d)
-      color_delta d = -region_atom r (i, d)
+      c0 = 1 + fromJust (findIndex (== j) cs)
+      color_delta d | d == c0 = [region_atom r (i, d)]
+      color_delta d = [-region_atom r (i, d)]
 
 -- Produce list of clauses enforcing that region
 -- i is adjacent to regions in js
@@ -57,7 +57,7 @@ main = do
   let r = length indices
   let colors = map (\(_ : [c] : _) -> c) map_elems
   let color_names = filter (/= '?') $ nub colors
-  let color_list = map (colorize r color_names) $ zip [1..] colors
+  let color_list = concatMap (colorize r color_names) $ zip [1..] colors
   let adjacencies = map (map read . tail . tail) map_elems
   let adjacency_list = concatMap (adjacentize r) $ zip [1..] adjacencies
   let clauses = color_list ++ adjacency_list ++
