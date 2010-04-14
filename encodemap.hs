@@ -11,12 +11,12 @@ c = 4
 
 -- Given a map with r regions
 -- produce the atom number for "region i is color j"
-region_atom r (i, j) = show $ c * i + j
+region_atom r (i, j) = show $ c * (i - 1) + (j - 1) + 1
 --region_atom r (i, j) = "r(" ++ show i ++ "," ++ show j ++ ")"
 
 -- Given a map with r regions
 -- produce the atom number for "region i is adjacent to region j"
-adjacency_atom r (i, j) = show $ r * c + i * r + j
+adjacency_atom r (i, j) = show $ r * c + r * (i - 1) + (j - 1) + 1
 --adjacency_atom r (i, j) = "a(" ++ show i ++ "," ++ show j ++ ")"
 
 -- Negate an atom
