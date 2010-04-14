@@ -1,7 +1,11 @@
 -- Copyright © 2010 Bart Massey
+-- This program is licensed under the MIT License
+-- Please see the file COPYING in this distribution
+-- for license information.
 
--- Encode (hand-encoded) map problems
--- as SAT problems in DIMACS format
+-- Encode (hand-encoded) map coloring problems as SAT
+-- problems in DIMACS format.  Tested with an example
+-- from sgt-puzzles.
 
 import Data.List
 import Data.Maybe
