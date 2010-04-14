@@ -1,0 +1,5 @@
+encodemap
+*.hi
+*.o
+cs543-map-soln.dat
+*.cnf
