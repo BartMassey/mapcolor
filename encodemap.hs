@@ -6,7 +6,7 @@ c = 4
 
 -- Given a map with r regions
 -- produce the atom number for "region i is color j"
-region_atom r (i, j) = show $ r * i + j
+region_atom r (i, j) = show $ c * i + j
 --region_atom r (i, j) = "r(" ++ show i ++ "," ++ show j ++ ")"
 
 -- Given a map with r regions
@@ -46,8 +46,8 @@ no_two_colors r =
     concatMap ntc' [1..r]
     where
       ntc' i = 
-          concat [[[neg (region_atom r (i, j)), neg (region_atom r (i, k))]
-                        | j <- [1..c], j /= k] | k <- [1..c]]
+          [[neg (region_atom r (i, j)), neg (region_atom r (i, k))]
+               | j <- [1..c], k <- [1..c], j /= k]
 
 -- Produce list of clauses enforcing that
 -- adjacent regions do not have the same color
@@ -55,9 +55,10 @@ no_adjacencies r =
     concatMap na' [1..c]
     where
       na' k = 
-          concat [[[neg (adjacency_atom r (i, j)),
-                    neg (region_atom r (i, k)), neg (region_atom r (j, k))]
-                       | i <- [1..r], i /= j] | j <- [1..r]]
+          [[neg (adjacency_atom r (i, j)),
+            neg (region_atom r (i, k)),
+            neg (region_atom r (j, k))]
+               | i <- [1..r], j <- [1..r], i /= j]
 
 main = do
   map_data <- getContents
