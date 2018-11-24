@@ -103,5 +103,5 @@ main = do
                 (some_color (r, c)) ++ (no_two_colors (r, c)) ++
                 (no_adjacencies (r, c))
   -- Print the problem
-  putStrLn $ "p cnf " ++ show (r*c + r*r) ++ " " ++ show (length clauses)
+  putStrLn $ "p cnf " ++ show (r*c + r*r - 1) ++ " " ++ show (length clauses)
   putStr $ unlines $ map (unwords . fix_clause) clauses
